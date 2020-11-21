@@ -2,7 +2,7 @@
 #include<fstream>
 using namespace std;
 int main(){
-  fstream Lecture_file("AND2.gv", ios::in);
+  fstream Lecture_file("MUX2-1.gv", ios::in);
   string line ;
   while(getline(Lecture_file, line)){
     cout<<line<<endl;

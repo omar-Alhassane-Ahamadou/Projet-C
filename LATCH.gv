@@ -1,0 +1,7 @@
+digraph test {
+I [label = "INPUT"];
+Bascule [label = "LA"];
+O [label = "OUTPUT"];
+I -> Bascule -> O;
+}
+

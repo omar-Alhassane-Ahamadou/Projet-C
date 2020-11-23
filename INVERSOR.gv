@@ -1,7 +1,7 @@
 digraph test {
 I [label = "INPUT"];
-Bascule [label = "IN"];
+INVERSOR [label = "INV"];
 O [label = "OUTPUT"];
-I -> Bascule -> O;
+I -> INVERSOR -> O;
 }
 

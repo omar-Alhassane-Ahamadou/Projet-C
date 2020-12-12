@@ -1,0 +1,1 @@
+g++ -std=c++11 parser_wavedrom.cpp -o parser_wavedrom

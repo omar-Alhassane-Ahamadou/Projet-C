@@ -11,14 +11,23 @@ Signal::Signal(const string & nom, vector<bool> entrees){
   Name=nom;
   In=entrees;
 }
-string const& Signal::getName() const{
-  return Name;
+void const Signal::getName() const{
+  cout<<"le nom du signal est : "<<Name;
 }
 
-vector<bool> const& Signal::getIn() const{
-  return In;
+void const Signal::getIn() const{
+cout << " les stimuli sont : ";
+  for(int l=0;l<In.size();l++){
+    cout <<In[l];
+  }
 }
 
 void Signal::setIn(const vector<bool> entrees){
   In = entrees;
 }
+
+void const Signal::toString() const{
+getName();
+cout<<" et ";
+getIn();
+};

@@ -63,4 +63,81 @@
                           cout << itr->first
                                << '\t' << itr->second << '\n';
                       }*/
-/********************************************************************************************/
+/***************************************NEW SPLIT FLECHE*****************************************************/
+/*string traitedline = line;
+string  keyword = "->";
+ size_t x= 0;
+string word;
+while ((x = traitedline.find(keyword)) != std::string::npos) {
+word = traitedline.substr(0, x );
+std::cout << word<<endl;
+
+ if (word==(circuit.getInput(word)).getNom()) {
+
+ t1=circuit.getInput(word);
+
+ } else if (word==(circuit.getOutput(word)).getNom()) {
+
+ t2=circuit.getOutput(word);
+
+} else if(word==((circuit.getGate(word))->getLabel())) {
+
+   t3=circuit.getGate(word);
+ }
+
+
+
+
+traitedline.erase(0, x  + keyword.length());
+}*/
+  //cout << traitedline << std::endl;
+
+  /**************************************/
+  //   istringstream  linelikefile1(line);
+  //   string line;
+  //   getline(linelikefile,linetempo,' ');
+    // std::cout <<linetempo<< '\n';
+/************************************TOUS MON ANCIEN CODE POUR PARSING FLECHE***************************/
+/*while(getline(file,line)){
+
+  size_t size=line.size()+1;// recupération de la longeur de la ligne lu par le fichier ainsi que le caractere de fin de ligne
+  char *test=new char[size];//  allocation dynamique d'un tableau de char en fontion de la longueur de la ligne lu
+  strncpy(test,line.c_str(),size);
+  if (strstr(test,fleche))
+  {
+/*      if (word==(circuit.getInput(word)).getNom()) {
+
+    t1=circuit.getInput(word);
+
+    } else if (word==(circuit.getOutput(word)).getNom()) {
+
+    t2=circuit.getOutput(word);
+
+  } else if(word==((circuit.getGate(word))->getLabel())) {
+
+      t3=circuit.getGate(word);
+    }*/
+
+    istringstream  linearrow(line);
+    string arrow;
+    getline(linearrow,arrow,' ');
+    std::cout <<arrow<< '\n';
+    getline(linearrow,arrow,' ');
+    getline(linearrow,arrow,' ');
+    std::cout <<arrow<< '\n';
+
+
+
+
+
+
+
+
+
+
+
+    i++;
+  }
+
+}*/
+//std::cout <<i<< '\n';

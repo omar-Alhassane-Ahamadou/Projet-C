@@ -15,6 +15,8 @@ using namespace std;
 
 class Input {
 
+//  friend Input& operator=( Input const & out,  Input const & f) ;
+
 private :
   string nom;
   bool   val;
@@ -34,10 +36,12 @@ public :
    void setNom (string nom);
    bool getVal();
    void setVal (bool val);
-
+   Input operator=(Input f) ;
 };
 
 class Output {
+
+//friend Output& operator=(Output& out, const Output &f) ;
 
   private :
     string nom;
@@ -58,7 +62,7 @@ class Output {
      void setNom (string nom);
      bool getVal();
      void setVal (bool val);
-
+     Output operator=(Output f);
 
 
 };
@@ -73,8 +77,9 @@ private :
           // map<string,bool> in;
          //map<string,bool> out;
         //vector<Gate *> gate;
-        Input in;
-        Output out;
+         vector<Input> in;
+      //  Input in3;
+        vector<Output> out;
         string label;
 public :
   Gate (string label)
@@ -85,22 +90,22 @@ public :
   ~Gate ()
   {
     std::cout << "Destruction Gate" << '\n';
-  //  delete [];
   }
-  Input getIn ();
-  Output getOut ();
+  Input getIn (string nom);
+  Output getOut (string nom);
   string getLabel();
-  void setIn (string in_key,bool in_val);
-  void setOut (string in_key,bool in_val);
+   //void setIn (Input inX);
+   //  void setOut (Output outX);
+  void addinput(Input);
   void setLabel (string label);
-//  void setGate (vector<Gate *> gate);
-//  string GetLabel ();
+
 //  virtual bool  EvalOutput () = 0;
 };
 
 /***********************************Class Intermediaire*********************************/
 class Circuit
 {
+
     private:
      list<Input> input;
      list<Output> output;
@@ -108,18 +113,22 @@ class Circuit
     public :
     Circuit ()
       {
-        std::cout << "constructeur Circuit" << '\n';
+        std::cout << "construction Circuit" << '\n'<< '\n';
       }
       ~Circuit  ()
       {
-        std::cout << "Destruction Circuit" << '\n';
+        std::cout << "Destruction Circuit" << '\n'<< '\n';
       }
 
        void ajoutgate(Gate * gateX);
        void ajoutinput(Input *inputX);
        void ajoutoutput(Output *outputX);
-       Gate * getGate();
-       vector<string> getInput();
+    //  vector<string> getInput();
+       Input getInput(string nom);
+       Output getOutput(string nom);
+       Gate * getGate(string nom);
+
+
 };
 /**************************************************************************************/
 
@@ -137,6 +146,11 @@ public :
    std::cout << "Destruction And" << '\n';
  }
 bool EvalOutput ();
+/* And operator=( And f){
+  this->setIn(f.getIn());
+  this->setIn2(f.getIn2());
+  this->setOut(f.getOut());
+  return *this;}*/
 
 };
 

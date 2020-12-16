@@ -33,6 +33,11 @@ using namespace std;
       this->val=val;
   }
 
+  Input Input::operator=(Input f){
+    this->setNom(f.getNom());
+    this->setVal(f.getVal());
+    return *this;}
+
 
 /******************************Fin Input*******************************************/
 
@@ -56,80 +61,149 @@ using namespace std;
       this->val=val;
   }
 
+  Output Output:: operator=( Output f){
+    this->setNom(f.getNom());
+    this->setVal(f.getVal());
+    return *this; }
 
 /******************************Fin Output****************************************/
 
 
 /***************************************Debut Gate***************************************/
 
-  Input Gate::getIn ()
+  Input Gate::getIn (string nom)
   {
-    return this->in;
-  }
-  Output Gate::getOut ()
-  {
-    return this->out;
-  }
-  string Gate::getLabel()
-  {
-    return this->label;
-  }
-
-  void Gate::setIn (string in_key,bool in_val)
-  {
-       (this->in).Input::setNom(in_key);
-       (this->in).Input::setVal(in_val);
-  }
-  void Gate::setOut (string in_key,bool in_val)
-  {
-    (this->out).Output::setNom(in_key);
-    (this->out).Output::setVal(in_val);
-  }
-  void Gate::setLabel (string label)
-  {
-    this->label=label;
+    vector<Input>::iterator itr ;
+    for(itr = in.begin() ; itr != in.end() ; ++itr)
+     {
+          Input X=*itr;
+            if (X.getNom()==nom)
+            {
+              return X;
+            }
+     }
   }
 
+   Output Gate::getOut (string nom)
+   {
+        vector<Output>::iterator itr ;
+      for(itr = out.begin() ; itr != out.end() ; ++itr)
+       {
+            Output X=*itr;
+              if (X.getNom()==nom)
+              {
+                return X;
+              }
+       }
+  }
+    string Gate::getLabel()
+   {
+     return this->label;
+   }
+
+/*void Gate::setIn (Input inX)
+  {
+    *this.Input::setNom();
+    *this.Input::setVal();
+  }
+  void Gate::setOut (Output outX)
+  {
+    *this.Output::setVal();
+    *this.Output::setNom();
+
+  }*/
+    void Gate::setLabel (string label)
+    {
+      this->label=label;
+    }
+
+  void Gate::addinput(Input Nwinput)
+  {
+    std::cout << "add input class Gate" << '\n';
+      in.push_back(Nwinput);
+  }
 /**************************************Fin Gate******************************************/
 
 /***************************Debut Circuit****************************************/
 void Circuit::ajoutgate(Gate * gateX=NULL)
 {
-
-  //std::cout << "ajout gate:" << gateX->getLabel()<<'\n';
-  //std::cout << "ajout porte dans la liste" << gate->getLabel() <<'\n';
+  std::cout << "add gate class Circuit" << '\n';
    gate.push_back(gateX);
-
-
-
 }
-
-/*Gate * Circuit::getGate()
-{
-  cout << "Contenu de la liste: ";
-  list<Gate >::iterator itr ;
-  if (this->gate.size()==0) {
-    std::cout << "LISTE VIDE" << '\n';
-    return 0;
-  }
-  for(itr = gate.begin() ; itr != gate.end() ; ++itr) {
-  // déréférencement de l'iterateur ;
-  //cout << *itr << " " ; // affichage de l’élément
-  return *itr;
-}
-
-}*/
-
-
 
 void Circuit::ajoutinput(Input *inputX)
 {
-  //std::cout << "ajout porte dans la liste" << gate->getLabel() <<'\n';
+  std::cout << "add input class Circuit" << '\n';
   input.push_back(*inputX);
+}
+
+void Circuit::ajoutoutput(Output *outputX)
+{
+  std::cout << "add output class Circuit" << '\n';
+  output.push_back(*outputX);
+}
+
+Input Circuit::getInput(string nom)
+{
+  if (this->input.size()==0) {
+    std::cout << "LISTE INPUT VIDE" << '\n';
+    exit(0);
+  }
+  list<Input>::iterator itr ;
+  for(itr = input.begin() ; itr != input.end() ; ++itr)
+   {
+        Input X=*itr;
+          if (X.getNom()==nom)
+          {
+            return X;
+          }
+
+   }
+}
+
+Output Circuit::getOutput(string nom)
+{
+
+  if (this->output.size()==0) {
+    std::cout << "LISTE OUTPUT VIDE" << '\n';
+    exit(0);
+  }
+
+  list<Output>::iterator itr ;
+  for(itr = output.begin() ; itr != output.end() ; ++itr)
+   {
+     Output X=*itr;
+          if (X.getNom()==nom)
+          {
+            return X;
+          }
+
+   }
 
 }
 
-vector<string> Circuit::getInput()
+Gate * Circuit::getGate(string nom)
+{
+
+
+  if (this->gate.size()==0) {
+    std::cout << "LISTE GATE VIDE" << '\n';
+    exit(0);
+  }
+  list<Gate*>::iterator itr ;
+  for(itr = gate.begin() ; itr != gate.end() ; ++itr) {
+
+      Gate* X=*itr;
+         if (X->getLabel()==nom)
+         {
+           return X;
+         }
+}
+
+}
+
+/********************************************************/
+/*vector<string> Circuit::getInput()
 {
   vector<string> A(100);
 
@@ -139,58 +213,11 @@ vector<string> Circuit::getInput()
   }
   list<Input>::iterator itr ;
   for(itr = input.begin() ; itr != input.end() ; ++itr) {
-  // déréférencement de l'iterateur ;
-  //cout << *itr << " " ; // affichage de l’élément
   Input X=*itr;
 
    A.push_back(X.getNom());
 }
 return A;
-}
-
-
-
-void Circuit::ajoutoutput(Output *outputX)
-{
-  //std::cout << "ajout porte dans la liste" << gate->getLabel() <<'\n';
-  output.push_back(*outputX);
-}
-
-/*********************************************Fin Circuit*********************************/
-
-
-
-
-
-
-
-
-
-/*void Modif_global(string in_key,bool in_val)
-{
-   in.insert({in_key,in_val});
-}*/
-/*
-map <string, bool> Gate::GetIn ()
-{
-  //return this->in;
-}
-map <string, bool> Gate::GetOut ()
-{
-  return this->out;
-}
-map <string, Gate *> Gate::GetGate ()
-{
-  return this->gate;
-}
-
- void Gate::SetIn (string in_key,bool in_val)
- {
-   in.insert(string in_key,bool in_va);
- }
 
 */
-
-/*
-void Gate::SetOut (map<string,bool> out);
-void Gate::SetGate (map<string,Gate> Gate);*/
+/*********************************************Fin Circuit*********************************/

@@ -119,7 +119,7 @@ using namespace std;
 
   void Gate::addinput(Input Nwinput)
   {
-    std::cout << "add input class Gate" << '\n';
+    std::cout << "add input class Gate :" << '\n';
       in.push_back(Nwinput);
   }
 /**************************************Fin Gate******************************************/

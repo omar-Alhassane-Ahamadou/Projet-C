@@ -13,14 +13,15 @@ class Signal {
 private:
   string Name;
   vector<bool> In;
+  vector<Signal> ListeSignaux;
 public:
   Signal(const string & nom, vector<bool> entrees);
   virtual ~Signal(){};
   void const getName() const;
   void const getIn() const;
-  void setIn(const vector<bool> entrees);
-  void const toString() const;
-
+  void const toStringSignal() const;
+  void  AddSignal(Signal *I) ;
+  void const toStringListeSignaux() const;
 };
 
 

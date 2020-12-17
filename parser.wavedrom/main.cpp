@@ -1,9 +1,7 @@
 /*-------------declaration des directives de préprocesseurs--------*/
 #include <iostream>
 #include <fstream>
-#include <regex>
 #include <iomanip>
-#include <algorithm>
 #include <string.h>
 #include "parser_wavedrom.h"
 #include <sstream>
@@ -72,7 +70,8 @@ int main (int argc, char *argv[])
         //  cout <<In[l] ;
         //}
         Signal I(Name,In);
-        ListeSignaux.push_back(I);
+        //ListeSignaux.push_back(I);
+        I.AddSignal(&I);
         //cout<<I.getName();
         //I.getIn();
         //I.toString();
@@ -83,18 +82,20 @@ int main (int argc, char *argv[])
         //*******************************************************************************
         //    cout<<linetempo;
         //cout <<", ";
+        I.toStringListeSignaux();
         i++;
       }
-      j=0;
+  //    j=0;
     }
     cout <<""<<endl;
     std::cout <<"le nombre d'entrées est de : ";
     std::cout << i << '\n';
     file.close();// fermer le fichier
-    for(int k=0;k<ListeSignaux.size();k++){
-      ListeSignaux[k].toString();
-      cout<<'\n';
-    }
+  //  for(int k=0;k<ListeSignaux.size();k++){
+  //    ListeSignaux[k].toStringSignal();
+  //    cout<<'\n';
+  //  }
+
   }
   else
   {

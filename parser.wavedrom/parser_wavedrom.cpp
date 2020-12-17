@@ -3,7 +3,6 @@
 #include <fstream>
 #include <regex>
 #include <iomanip>
-#include <algorithm>
 #include <string.h>
 #include "parser_wavedrom.h"
 
@@ -22,12 +21,20 @@ cout << " les stimuli sont : ";
   }
 }
 
-void Signal::setIn(const vector<bool> entrees){
-  In = entrees;
-}
-
-void const Signal::toString() const{
+void const Signal::toStringSignal() const{
 getName();
 cout<<" et ";
 getIn();
+};
+
+ void  Signal::AddSignal(Signal *I) {
+   ListeSignaux.push_back(*I);
+   //cout<<"signal a été ajouté";
+ };
+
+void const Signal::toStringListeSignaux() const{
+  for(int k=0;k<ListeSignaux.size();k++){
+    ListeSignaux[k].toStringSignal();
+    cout<<'\n';
+  }
 };

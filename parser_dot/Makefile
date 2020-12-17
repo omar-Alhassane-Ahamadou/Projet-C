@@ -1,5 +1,5 @@
-CFLAGS=-g
-LDFLAGS=-Wall -pedantic -std=c++11
+CFLAGS=-g -std=c++14
+LDFLAGS=-Wall -pedantic
 
 all : clean main parser_dot
 

@@ -117,7 +117,7 @@ using namespace std;
       this->label=label;
     }
 
-  void Gate::addinput(Input Nwinput)
+  void Gate::addinput(Input & Nwinput)
   {
     std::cout << "add input class Gate :" << '\n';
       in.push_back(Nwinput);

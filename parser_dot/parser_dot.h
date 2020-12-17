@@ -5,13 +5,18 @@
 #include <fstream>
 #include <iomanip>
 #include <algorithm>
-#include <string.h>
+#include <string>
+#include <cstddef>
 #include <map>
 #include <sstream>
 #include <vector>
+#include <cstring>
 #include<list>
 
 using namespace std;
+
+
+/***********************************************/
 
 class Input {
 
@@ -96,7 +101,7 @@ public :
   string getLabel();
    //void setIn (Input inX);
    //  void setOut (Output outX);
-  void addinput(Input);
+  void addinput(Input&);
   void setLabel (string label);
 
 //  virtual bool  EvalOutput () = 0;

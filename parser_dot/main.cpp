@@ -10,6 +10,13 @@
 #include<list>
 #include "parser_dot.h"
 
+/*************************************************************/
+/*************************************************************/
+/*************************************************************/
+/****BY OMAR ALHASSANE-AHAMADOU & ANTHONY KY******************/
+/*******************SIMULATEUR DE NETLIST**********************/
+/*************************************************************/
+/*************************************************************/
 
 /*-------------Utilisation de l'espace standard--------*/
 
@@ -18,9 +25,9 @@ using namespace std;
 /*-------------Lecture fichier--------*/
 int main (int argc, char *argv[])
 {
-  ifstream file("./and_xor.dot",ios::in); // Constrcteur pour crée un flux d'ouverture pour le fichier en lecture;
-  ifstream file1("./and_xor.dot",ios::in); // Constrcteur pour crée un flux d'ouverture pour le fichier en lecture;
-  ifstream file2("./and_xor.dot",ios::in); // Constrcteur pour crée un flux d'ouverture pour le fichier en lecture;
+  ifstream file("/home/phelma/Desktop/Projet_C/FINALTEST/Examen/Examen/portes_elementaires/Mux_implicit.dot",ios::in); // Constrcteur pour crée un flux d'ouverture pour le fichier en lecture;
+  ifstream file1("/home/phelma/Desktop/Projet_C/FINALTEST/Examen/Examen/portes_elementaires/Mux_implicit.dot",ios::in); // Constrcteur pour crée un flux d'ouverture pour le fichier en lecture;
+  ifstream file2("/home/phelma/Desktop/Projet_C/FINALTEST/Examen/Examen/portes_elementaires/Mux_implicit.dot",ios::in); // Constrcteur pour crée un flux d'ouverture pour le fichier en lecture;
   //char pattern []  ="OR2";
   vector<string> pattern;
   vector<string> pattern1;
@@ -32,19 +39,26 @@ int main (int argc, char *argv[])
   /******GATE****/
   pattern1.push_back("AND2");
   pattern1.push_back("AND3");
+  pattern1.push_back("NOT");
+  pattern1.push_back("NOR2");
+  pattern1.push_back("NAND2");
   pattern1.push_back("FF");
   pattern1.push_back("INVERSOR");
   pattern1.push_back("LATCH");
+  pattern1.push_back("MUX");
   pattern1.push_back("MUX2");
-  pattern1.push_back("MUX3");
   pattern1.push_back("XOR2");
+  pattern1.push_back("XNOR2");
   pattern1.push_back("XOR3");
-  //pattern1.push_back("OR2");
+  pattern1.push_back("OR2");
   pattern1.push_back("OR3");
   /*************/
   string lineVerif;
+  string lineVerif1;
   string lineLink;
   string line;
+  size_t k=0;
+  size_t m=0;
   Circuit circuit;
   Input *X=NULL;
   char fleche[]="->";
@@ -70,11 +84,18 @@ int main (int argc, char *argv[])
     switch (state) {
 
       case DIGRAPH:// gestion des erreurs digraph , accolade, espace en debut de ligne pour digraph
+
        while(getline(file,lineVerif)){
          if(lineVerif.find("//")!=string::npos || lineVerif.find("/*")!=string::npos )
          {
-           std::cout <<"commentaire "<<j<<" :"<<lineVerif<<'\n';
+           std::cout <<"commentaire en debut de fichier "<<j<<" :"<<lineVerif<<'\n';
            j++;
+         }
+         else if(lineVerif.empty())
+         {
+           std::cout <<"espace vide en debut de ligne"<<'\n'<<"Veuilez à ce que la premiere ligne du ficfier et le premier mot soit digraph"<<endl;
+           j++;
+           exit(0);
          }
          else
          {
@@ -164,7 +185,7 @@ int main (int argc, char *argv[])
   }
   else
   {
-      cerr<<" failure for openning file operating point 1"<< endl;
+      cerr<<"failure for openning file operating point 1"<< endl;
       exit(0);
   }
 /****************************************************************Fin gestion erreur***********************/
@@ -172,9 +193,26 @@ int main (int argc, char *argv[])
      std::cout << "PASSONS A L'ETAPE D'INSTANCIATION DE NOS INPUT OUTPUT ET PORTES (SANS CONNEXION)" << '\n'<<'\n'<<'\n';
     if (file1)
   {
+
+
     //ofstream tempo("./tempo.txt",ios::out|ios::app);// Constructeur pour crée un flux d'ouverture pour le fichier en ecriture ;
     //if (tempo)
     while(getline(file1,line)){
+
+      if(line.find("//",0)!=std::string::npos)
+       {
+
+                m=line.find("//");
+                line.erase(m);
+
+       }
+       else if(line.find("/*",0)!=std::string::npos)
+       {
+
+                  m=line.find("/*");
+                  line.erase(m);
+       }
+
       size_t size=line.size()+1;// recupération de la longeur de la ligne lu par le fichier ainsi que le caractere de fin de ligne
       char *test=new char[size];//  allocation dynamique d'un tableau de char en fontion de la longueur de la ligne lu
       strncpy(test,line.c_str(),size);// conversion string vers char
@@ -232,54 +270,79 @@ int main (int argc, char *argv[])
       char *test_pattern1=new char[taille1];
       strncpy(test_pattern1,tempo_pattern1.c_str(),taille1);
 
-                if (strstr(test,test_pattern1))
+      istringstream  linelikefile1(line);
+      getline(linelikefile1,linetempo1,'"');
+      getline(linelikefile1,linetempo1,'"');
+
+      size_t size0=linetempo1.size()+1;
+      char* t=new char[size0];
+      strncpy(t,linetempo1.c_str(),size0);
+                if (strcmp(t,test_pattern1)==0)
                 {
-                  istringstream  linelikefile1(line);
-                  getline(linelikefile1,linetempo1,' ');
+
+
                 //  std::cout <<test_pattern1 << '\n';
-                  if(tempo_pattern1 =="AND2")
+                  if(linetempo1 =="AND2")
                   {
                   circuit.ajoutgate(new And(linetempo1));
                   }
-                  else if(tempo_pattern1 =="XOR2")
+                  else if(linetempo1  =="XOR2")
                   {
                    circuit.ajoutgate(new Xor(linetempo1));
                   }
-                  else if(tempo_pattern1 =="FF")
+                  else if(linetempo1  =="FF")
                   {
                    circuit.ajoutgate(new Flipflop(linetempo1));
                   }
-                  else if(tempo_pattern1 =="INVERSOR")
+                  else if(linetempo1  =="INVERSOR")
                   {
                    circuit.ajoutgate(new Inversor(linetempo1));
                   }
-                  else if(tempo_pattern1 =="LATCH")
+                  else if(linetempo1 =="LATCH")
                   {
                    circuit.ajoutgate(new Latch(linetempo1));
                   }
-                  else if(tempo_pattern1 =="MUX2")
+                  else if(linetempo1  =="MUX")
                   {
                    circuit.ajoutgate(new Mux(linetempo1));
                   }
-                  else if(tempo_pattern1 =="OR2")
+                  else if(linetempo1  =="OR2")
                   {
                    circuit.ajoutgate(new Or(linetempo1));
                   }
-                  else if(tempo_pattern1 =="OR3")
+                  else if(linetempo1  =="OR3")
                   {
                    circuit.ajoutgate(new Or(linetempo1));
                   }
-                  else if(tempo_pattern1 =="AND3")
+                  else if(linetempo1  =="AND3")
                   {
                    circuit.ajoutgate(new And(linetempo1));
                   }
-                  else if(tempo_pattern1 =="MUX3")
+                  else if(linetempo1  =="MUX3")
                   {
                    circuit.ajoutgate(new Mux(linetempo1));
                   }
+                  else if(linetempo1 =="NAND2")
+                  {
+                   circuit.ajoutgate(new Nand(linetempo1));
+                  }
+                  else if(linetempo1 =="NOR2")
+                  {
+                   circuit.ajoutgate(new Nor(linetempo1));
+                  }
+                  else if(linetempo1 =="NOT")
+                  {
+                   circuit.ajoutgate(new Not(linetempo1));
+                  }
+                  else if(linetempo1 =="XNOR2")
+                  {
+                   circuit.ajoutgate(new Xnor(linetempo1));
+                  }
+                  //st
                   //std::cout <<linetempo1<< '\n';
                   i++;
                 }
+
 
     }
       //cout<<line<<endl;
@@ -297,13 +360,28 @@ file1.close();// fermer le fichier
 // Input t1[1000];
 // Output t2[1000];
 // Gate* t3;
-int nbligne=0;
 int x=1;
 std::cout << '\n'<< "ENFIN REALISONS LES INTERCONNEXIONS ENTRE LES PORTES,ENTREES ET SORTIES" << '\n'<<'\n';
 
 if (file2)
 {
+
   while(getline(file2,lineLink)){
+
+   if(lineLink.find("//",0)!=std::string::npos)
+    {
+
+             k=lineLink.find("//");
+             lineLink.erase(k);
+
+    }
+    else if(lineLink.find("/*",0)!=std::string::npos)
+    {
+
+               k=lineLink.find("/*");
+               lineLink.erase(k);
+    }
+
     size_t size=lineLink.size()+1;// recupération de la longeur de la ligne lu par le fichier ainsi que le caractere de fin de ligne
     char *test=new char[size];//  allocation dynamique d'un tableau de char en fontion de la longueur de la ligne lu
     strncpy(test,lineLink.c_str(),size);

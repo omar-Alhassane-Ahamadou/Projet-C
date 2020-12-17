@@ -13,6 +13,17 @@
 #include <cstring>
 #include<list>
 
+
+/*************************************************************/
+/*************************************************************/
+/*************************************************************/
+/****BY OMAR ALHASSANE-AHAMADOU & ANTHONY KY******************/
+/*******************SIMULATEUR DE NETLIST**********************/
+/*************************************************************/
+/*************************************************************/
+
+
+
 using namespace std;
 
 
@@ -262,6 +273,70 @@ public :
  ~Flipflop ()
  {
    std::cout << "Destruction Flipflop" << '\n';
+ }
+bool EvalOutput ();
+
+};
+/***********************************NAND2***************************************/
+class Nand : public Gate
+{
+
+public :
+  Nand (string label) : Gate (label)
+  {
+    std::cout << "Construction Nand" << '\n';
+  }
+ ~Nand ()
+ {
+   std::cout << "Destruction Nand" << '\n';
+ }
+bool EvalOutput ();
+
+};
+/***********************************NOR2***************************************/
+class Nor : public Gate
+{
+
+public :
+  Nor (string label) : Gate (label)
+  {
+    std::cout << "Construction Nor" << '\n';
+  }
+ ~Nor ()
+ {
+   std::cout << "Destruction Nor" << '\n';
+ }
+bool EvalOutput ();
+
+};
+/***********************************NOT***************************************/
+class Not : public Gate
+{
+
+public :
+  Not(string label) : Gate (label)
+  {
+    std::cout << "Construction Not" << '\n';
+  }
+ ~Not ()
+ {
+   std::cout << "Destruction Not" << '\n';
+ }
+bool EvalOutput ();
+
+};
+/***********************************NOT2***************************************/
+class Xnor: public Gate
+{
+
+public :
+  Xnor(string label) : Gate (label)
+  {
+    std::cout << "Construction Xnor" << '\n';
+  }
+ ~Xnor ()
+ {
+   std::cout << "Destruction Xnor" << '\n';
  }
 bool EvalOutput ();
 

@@ -8,6 +8,17 @@
 #include <map>
 #include <list>
 #include <vector>
+
+
+
+/*************************************************************/
+/*************************************************************/
+/*************************************************************/
+/****BY OMAR ALHASSANE-AHAMADOU & ANTHONY KY******************/
+/*******************SIMULATEUR DE NETLIST**********************/
+/*************************************************************/
+/*************************************************************/
+
 /*-------------Utilisation de l'espace standard--------*/
 
 using namespace std;
@@ -15,7 +26,7 @@ using namespace std;
 /*-------------Lecture fichier--------*/
 int main (int argc, char *argv[])
 {
-  ifstream file("Inputs.json",ios::in); // Constrcteur pour crée un flux d'ouverture pour le fichier en lecture; chemmin absolu (se rappeler relatif)
+  ifstream file("./full_adder.json",ios::in); // Constrcteur pour crée un flux d'ouverture pour le fichier en lecture; chemmin absolu (se rappeler relatif)
   char character;
   char pattern []  ="wave: '";
   string line;

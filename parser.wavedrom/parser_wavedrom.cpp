@@ -1,12 +1,19 @@
 /*-------------declaration des directives de préprocesseurs--------*/
 #include <iostream>
 #include <fstream>
-#include <regex>
 #include <iomanip>
 #include <string.h>
 #include "parser_wavedrom.h"
-
+/*************************************************************/
+/*************************************************************/
+/*************************************************************/
+/****BY OMAR ALHASSANE-AHAMADOU & ANTHONY KY******************/
+/*******************SIMULATEUR DE NETLIST**********************/
+/*************************************************************/
+/*************************************************************/
 Signal::Signal(const string & nom, vector<bool> entrees){
+
+  std::cout << "Construction signal" <<'\n';
   Name=nom;
   In=entrees;
 }
